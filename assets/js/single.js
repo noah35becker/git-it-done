@@ -1,7 +1,7 @@
 
 var issueContainerEl = document.querySelector('#issues-container');
 var limitWarningEl = document.querySelector('#limit-warning');
-
+var repoNameEl = document.querySelector('#repo-name');
 
 function getRepoIssues(repo){ // repo parameter = 'owner/repo-name'
     fetch('https://api.github.com/repos/' + repo + '/issues?direction=asc')
@@ -14,7 +14,7 @@ function getRepoIssues(repo){ // repo parameter = 'owner/repo-name'
                         displayWarning(repo);
                 });
             else
-                alert('There was a problem with your request');
+                document.location.replace('./index.html');
         })
 }
 
@@ -59,5 +59,13 @@ function displayWarning(repo){
 }
 
 
-getRepoIssues('angular/angular');
-// getRepoIssues('noah35becker/git-it-done');
+function getRepoName(){
+    var repoName = document.location.search.split('=')[1];
+    if (repoName){
+        repoNameEl.textContent = repoName;
+        return repoName;
+    }else
+        document.location.replace('./index.html');
+}
+
+getRepoIssues(getRepoName());

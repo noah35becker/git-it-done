@@ -39,8 +39,9 @@ function displayRepos(repos, searchTerm){
         else
             statusEl.innerHTML = '<i class="fas fa-check-square status-icon icon-success"></i>';
 
-        var repoEl = document.createElement('div');
+        var repoEl = document.createElement('a');
         repoEl.classList = 'list-item flex-row justify-space-between align-center';
+        repoEl.setAttribute('href', './single-repo.html?repo=' + repoName);
         repoEl.appendChild(titleEl);
         repoEl.appendChild(statusEl);
 
